@@ -1,0 +1,367 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HireStack | Admin Control Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        * {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: #020617;
+            background-image: radial-gradient(at 0% 0%, rgba(30, 58, 138, 0.15) 0, transparent 50%);
+            color: #f8fafc;
+        }
+
+        .glass-sidebar {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .stat-card {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: #3b82f6;
+            background: rgba(30, 41, 59, 0.6);
+        }
+
+        .table-row:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .search-bar {
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex">
+
+    <aside class="w-64 glass-sidebar h-screen sticky top-0 flex flex-col p-6 hidden lg:flex">
+        <div class="flex items-center gap-3 mb-10 px-2">
+            <div class="bg-blue-600 p-2 rounded-lg"><i class="fas fa-shield-alt text-white"></i></div>
+            <span class="text-xl font-bold tracking-tight">HireStack <span class="text-blue-500">HQ</span></span>
+        </div>
+
+        <nav class="space-y-2 flex-1">
+            <a href="#"
+                class="flex items-center gap-3 px-4 py-3 rounded-xl bg-blue-600/10 text-blue-400 font-semibold border border-blue-600/20">
+                <i class="fas fa-th-large"></i> Dashboard
+            </a>
+            <a href="#user-directory"
+                class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-white transition-all">
+                <i class="fas fa-users"></i> Manage Users
+            </a>
+            <a href="#employee-directory"
+                class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-white transition-all">
+                <i class="fas fa-user-tie"></i> Employee Directory
+            </a>
+            <a href="#job-postings"
+                class="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-white/5 hover:text-white transition-all">
+                <i class="fas fa-briefcase"></i> Job Postings
+            </a>
+        </nav>
+
+        <div class="pt-6 border-t border-white/5">
+            <a href="{% url 'logout' %}"
+                class="flex items-center gap-3 px-4 py-3 rounded-xl text-rose-400 hover:bg-rose-400/10 transition-all">
+                <i class="fas fa-power-off"></i> Sign Out
+            </a>
+        </div>
+    </aside>
+
+    <main class="flex-1 p-8 overflow-y-auto">
+
+        <header class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-10">
+            <div>
+                <h1 class="text-3xl font-bold">Admin Overview</h1>
+                <p class="text-slate-500 text-sm mt-1">Welcome back, {{ request.user.username }}</p>
+            </div>
+            <form method="GET" action="#job-postings" class="relative group">
+
+                <i class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-slate-500"></i>
+
+                <input type="text" name="q" value="{{ request.GET.q }}" placeholder="Search job title or location..."
+                    class="search-bar w-full md:w-80 pl-12 pr-4 py-3 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20">
+
+            </form>
+        </header>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="stat-card p-6 rounded-3xl">
+                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-2">Active Employees</p>
+                <div class="flex items-end justify-between">
+                    <h2 class="text-4xl font-extrabold">{{ employee_count }}</h2>
+                    <span class="text-emerald-500 text-xs font-bold bg-emerald-500/10 px-2 py-1 rounded-lg">+12%</span>
+                </div>
+            </div>
+            <div class="stat-card p-6 rounded-3xl">
+                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-2">Pending Applications</p>
+                <div class="flex items-end justify-between">
+                    <h2 class="text-4xl font-extrabold text-blue-400">{{ application_count }}</h2>
+                    <i class="fas fa-clock text-slate-700 text-xl"></i>
+                </div>
+            </div>
+            <div class="stat-card p-6 rounded-3xl">
+                <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mb-2">Live Jobs</p>
+                <div class="flex items-end justify-between">
+                    <h2 class="text-4xl font-extrabold text-white">{{ live_jobs_count }}</h2>
+                    <i class="fas fa-globe text-slate-700 text-xl"></i>
+                </div>
+            </div>
+        </div>
+
+        <section id="user-directory" class="stat-card rounded-[2rem] overflow-hidden mb-12">
+            <div class="p-8 flex items-center justify-between border-b border-white/5">
+                <div class="flex items-center gap-3">
+                    <div
+                        class="w-10 h-10 bg-emerald-500/10 rounded-xl flex items-center justify-center text-emerald-500">
+                        <i class="fas fa-users text-lg"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">User Directory</h3>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-white/5">
+                        <tr class="text-slate-500 text-[10px] uppercase font-bold tracking-widest">
+                            <th class="px-8 py-4">Identity</th>
+                            <th class="px-8 py-4">Account Type</th>
+                            <th class="px-8 py-4">Status</th>
+                            <th class="px-8 py-4">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-white/5">
+                        {% for user in user_list %}
+                        <tr class="table-row transition-colors">
+                            <td class="px-8 py-5">
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center text-white font-bold">
+                                        {{ user.full_name|slice:":1"|upper }}
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-bold">{{ user.full_name }}</p>
+                                        <p class="text-xs text-slate-500">{{ user.email }}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-8 py-5">
+                                <p class="text-sm text-slate-300">{{ user.role }}</p>
+                            </td>
+                            <td class="px-8 py-5">
+                                {% if user.is_blocked %}
+                                <span
+                                    class="px-3 py-1 rounded-full bg-rose-500/10 text-rose-400 text-[10px] font-bold uppercase">Blocked</span>
+                                {% else %}
+                                <span
+                                    class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-bold uppercase">Active</span>
+                                {% endif %}
+                            </td>
+                            <td class="px-8 py-5">
+                                <div class="flex items-center gap-3">
+                                    <button class="text-slate-400 hover:text-white"><i class="fas fa-edit"></i></button>
+                                    <a href="{% url 'block_user' user.id %}" class="text-rose-400 hover:text-rose-500">
+                                        <i class="fas fa-ban"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="employee-directory" class="stat-card rounded-[2rem] overflow-hidden mb-12">
+            <div class="p-8 flex items-center justify-between border-b border-white/5">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-blue-500/10 rounded-xl flex items-center justify-center text-blue-500">
+                        <i class="fas fa-user-tie text-lg"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">Employee Directory</h3>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-white/5">
+                        <tr class="text-slate-500 text-[10px] uppercase font-bold tracking-widest">
+                            <th class="px-8 py-4">Identity</th>
+                            <th class="px-8 py-4">Role / Department</th>
+                            <th class="px-8 py-4">Status</th>
+                            <th class="px-8 py-4">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-white/5">
+                        {% for person in people_list %}
+                        <tr class="table-row transition-colors">
+                            <td class="px-8 py-5">
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="w-10 h-10 rounded-full bg-blue-600/20 flex items-center justify-center text-blue-400 font-bold border border-blue-600/10">
+                                        {{ person.username|slice:":1"|upper }}
+                                    </div>
+                                    <div>
+                                        <p class="text-sm font-bold">{{ person.first_name }} {{ person.last_name }}</p>
+                                        <p class="text-xs text-slate-500">{{ person.email }}</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="px-8 py-5">
+                                <p class="text-sm">{% if person.department %}{{ person.department }}{% else %}Internal
+                                    Staff{% endif %}</p>
+                            </td>
+                            <td class="px-8 py-5">
+                                {% if person.is_blocked %}
+                                <span
+                                    class="px-3 py-1 rounded-full bg-rose-500/10 text-rose-400 text-[10px] font-bold uppercase">Blocked</span>
+                                {% else %}
+                                <span
+                                    class="px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-[10px] font-bold uppercase">Active</span>
+                                {% endif %}
+                            </td>
+                            <td class="px-8 py-5">
+                                <div class="flex items-center gap-3">
+                                    <a href="#"
+                                        class="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-slate-400 hover:text-white transition-all"><i
+                                            class="fas fa-eye text-xs"></i></a>
+                                    <a href="{% url 'block_employee' person.id %}"
+                                        class="w-8 h-8 rounded-lg bg-rose-500/10 flex items-center justify-center text-rose-400 hover:bg-rose-500 hover:text-white">
+                                        <i class="fas fa-ban text-xs"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <section id="job-postings" class="stat-card rounded-[2rem] overflow-hidden mb-12">
+            <div class="p-8 flex items-center justify-between border-b border-white/5">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 bg-purple-500/10 rounded-xl flex items-center justify-center text-purple-500">
+                        <i class="fas fa-briefcase text-lg"></i>
+                    </div>
+                    <h3 class="text-xl font-bold">Manage Job Postings</h3>
+                </div>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left">
+                    <thead class="bg-white/5">
+                        <tr class="text-slate-500 text-[10px] uppercase font-bold tracking-widest">
+                            <th class="px-8 py-4">Position Title</th>
+                            <th class="px-8 py-4">Department</th>
+                            <th class="px-8 py-4">Job Type</th>
+                            <th class="px-8 py-4">Applications</th>
+                            <th class="px-8 py-4">Status</th>
+                            <th class="px-8 py-4">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-white/5">
+                        {% for job in job_list %}
+                        <tr class="table-row transition-colors">
+
+                            <td class="px-8 py-5">
+                                <p class="text-sm font-bold text-white">{{ job.job_title }}</p>
+                                <p class="text-[10px] text-slate-500">
+                                    Posted on {{ job.created_at|date:"M d, Y" }}
+                                </p>
+                            </td>
+
+                            <td class="px-8 py-5">
+                                <p class="text-sm text-slate-300">
+                                    {{ job.employee.department }}
+                                </p>
+                            </td>
+
+                            <td class="px-8 py-5">
+                                <span class="text-xs border border-white/10 px-2 py-1 rounded-md text-slate-400">
+                                    {{ job.job_type }}
+                                </span>
+                            </td>
+
+                            <td class="px-8 py-5">
+                                <p class="text-sm font-semibold text-blue-400">0</p>
+                            </td>
+
+                            <td class="px-8 py-5">
+                                {% if job.is_active %}
+                                <span
+                                    class="flex items-center gap-1.5 text-emerald-400 text-[10px] font-bold uppercase">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                                    Live
+                                </span>
+                                {% else %}
+                                <span class="text-slate-500 text-[10px] font-bold uppercase">
+                                    Closed
+                                </span>
+                                {% endif %}
+                            </td>
+
+                            <td class="px-8 py-5">
+                                <div class="flex items-center gap-3">
+                                    <button class="text-slate-400 hover:text-white">
+                                        <i class="fas fa-edit text-xs"></i>
+                                    </button>
+                                    <a href="{% url 'delete_job' job.id %}" class="text-rose-400 hover:text-rose-500">
+                                        <i class="fas fa-trash-alt text-xs"></i>
+                                    </a>
+                                </div>
+                            </td>
+
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <div class="mt-8 grid md:grid-cols-2 gap-8">
+            <div class="stat-card p-8 rounded-[2rem] flex flex-col items-center justify-center text-center">
+                <i class="fas fa-chart-pie text-blue-500 text-3xl mb-4"></i>
+                <h4 class="font-bold">Job Market Analysis</h4>
+                <p class="text-sm text-slate-500 max-w-xs mt-2">See which departments are hiring the most and tracking
+                    recruitment speed.</p>
+            </div>
+            <div class="stat-card p-8 rounded-[2rem] flex flex-col items-center justify-center text-center">
+                <i class="fas fa-history text-blue-500 text-3xl mb-4"></i>
+                <h4 class="font-bold">Audit Logs</h4>
+                <p class="text-sm text-slate-500 max-w-xs mt-2">Monitor all administrative changes, logins, and job
+                    removals in real-time.</p>
+            </div>
+        </div>
+
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Access | Secure</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700&display=swap');
+
+        body { 
+            margin: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            height: 100vh; 
+            background: #020617; /* Deepest blue/black */
+            overflow: hidden;
+        }
+
+        /* Ambient background glow */
+        .glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+            filter: blur(80px);
+            z-index: 0;
+        }
+
+        .login-card { 
+            position: relative;
+            z-index: 1;
+            background: rgba(15, 23, 42, 0.6); /* Semi-transparent */
+            backdrop-filter: blur(20px); /* The frosted glass effect */
+            padding: 3rem; 
+            border-radius: 2rem; 
+            width: 360px; 
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        h2 { 
+            text-align: center; 
+            color: #ffffff; 
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+            letter-spacing: -0.025em;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        input { 
+            width: 100%; 
+            padding: 14px 16px; 
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 12px; 
+            box-sizing: border-box; 
+            color: #ffffff;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.06);
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+        }
+
+        button { 
+            width: 100%; 
+            padding: 14px; 
+            background: #2563eb; 
+            border: none; 
+            color: white; 
+            border-radius: 12px; 
+            cursor: pointer; 
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-top: 1rem;
+            transition: transform 0.2s, background 0.2s;
+        }
+
+        button:hover { 
+            background: #3b82f6; 
+            transform: translateY(-2px);
+        }
+
+        .footer-link {
+            display: block;
+            text-align: center;
+            margin-top: 1.5rem;
+            color: #64748b;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover { color: #3b82f6; }
+    </style>
+</head>
+<body>
+
+<div class="glow"></div>
+
+<div class="login-card">
+    <h2>Admin Access</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="input-group">
+            <input type="text" name="username" placeholder="Username" required> 
+        </div>
+        <div class="input-group">
+            <input type="password" name="password" placeholder="Password" required>
+        </div>
+        <button type="submit">Sign In</button>
+    </form>
+    <a href="#" class="footer-link">Need help accessing the portal?</a>
+</div>
+
+</body>
+</html>

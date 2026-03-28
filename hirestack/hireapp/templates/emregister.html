@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Registration | Internal Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-slate-950 min-h-screen flex items-center justify-center p-6 text-slate-200">
+
+    <div class="max-w-md w-full bg-slate-900 rounded-3xl shadow-2xl overflow-hidden border border-slate-800">
+        <div class="bg-indigo-600 p-8 text-center text-white">
+            <div class="inline-flex items-center justify-center w-12 h-12 bg-white/10 rounded-xl mb-3 border border-white/20">
+                <i class="fas fa-id-badge text-xl"></i>
+            </div>
+            <h1 class="text-2xl font-bold">Employee Onboarding</h1>
+            <p class="text-indigo-100 text-sm opacity-80">Create your staff account</p>
+        </div>
+
+        {% if messages %}
+        <div class="px-8 pt-6">
+            {% for message in messages %}
+            <div class="p-4 rounded-xl {% if message.tags == 'success' %}bg-emerald-500/10 border border-emerald-500/20 text-emerald-400{% else %}bg-rose-500/10 border border-rose-500/20 text-rose-400{% endif %} text-sm flex items-center gap-3">
+                <i class="fas {% if message.tags == 'success' %}fa-check-circle{% else %}fa-exclamation-circle{% endif %}"></i>
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <form method="post" class="p-8 space-y-5">
+            {% csrf_token %}
+            
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-300 mb-1">First Name</label>
+                    <input type="text" name="first_name" placeholder="First Name" 
+                           class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 outline-none transition-all" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-300 mb-1">Last Name</label>
+                    <input type="text" name="last_name" placeholder="Last Name" 
+                           class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 outline-none transition-all" required>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <label class="block text-sm font-semibold text-slate-300 mb-1">Employee ID</label>
+                    <input type="text" name="employee_id" placeholder="EMP-1234" 
+                           class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 outline-none transition-all" required>
+                </div>
+
+                <div>
+                    <label class="block text-sm font-semibold text-slate-300 mb-1">Department</label>
+                    <select name="department" class="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-slate-300 focus:ring-2 focus:ring-indigo-500 outline-none transition-all cursor-pointer appearance-none" required>
+                        <option value="" disabled selected class="bg-slate-900">Select</option>
+                        <option value="hr" class="bg-slate-900">HR</option>
+                        <option value="it" class="bg-slate-900">IT Support</option>
+                        <option value="dev" class="bg-slate-900">Development</option>
+                        <option value="finance" class="bg-slate-900">Finance</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-slate-300 mb-1">Work Email</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500">
+                        <i class="fas fa-envelope text-sm"></i>
+                    </span>
+                    <input type="email" name="email" placeholder="Email" 
+                           class="w-full pl-10 pr-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 outline-none transition-all" required>
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-semibold text-slate-300 mb-1">Set Password</label>
+                <div class="relative">
+                    <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-500">
+                        <i class="fas fa-lock text-sm"></i>
+                    </span>
+                    <input type="password" name="password" placeholder="••••••••" 
+                           class="w-full pl-10 pr-4 py-3 bg-slate-800 border border-slate-700 rounded-xl text-white placeholder-slate-500 focus:ring-2 focus:ring-indigo-500 outline-none transition-all" required>
+                </div>
+            </div>
+
+            <button type="submit" class="w-full bg-indigo-600 text-white font-bold py-4 rounded-xl hover:bg-indigo-500 active:scale-[0.98] transition-all shadow-lg shadow-indigo-900/30 mt-2">
+                Create Account
+            </button>
+
+            <p class="text-center text-sm text-slate-400 mt-4">
+                Already registered? <a href="#" class="text-indigo-400 font-bold hover:text-indigo-300 transition-colors">Log In</a>
+            </p>
+        </form>
+    </div>
+
+</body>
+</html>

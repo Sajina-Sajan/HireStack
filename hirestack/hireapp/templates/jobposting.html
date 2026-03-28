@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post a New Job | HireStack Employer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-950 font-sans text-gray-200">
+
+<div class="min-h-screen flex items-center justify-center p-6">
+    <div class="max-w-4xl w-full bg-gray-900 rounded-2xl shadow-2xl border border-gray-800 overflow-hidden">
+        
+        <div class="bg-blue-700 p-8 text-white flex justify-between items-center">
+            <div>
+                <h1 class="text-3xl font-bold">Post a New Role</h1>
+                <p class="text-blue-100 mt-1">Fill in the details to find your next top-tier talent.</p>
+            </div>
+            <div class="hidden md:block">
+                <i class="fas fa-briefcase text-5xl opacity-20"></i>
+            </div>
+        </div>
+
+        <form method="post" class="p-8 md:p-12 space-y-6">
+            {% csrf_token %}
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Job Title</label>
+                    <input type="text" name="job_title" placeholder="e.g. Senior Backend Developer" 
+                           class="w-full p-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" required>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Company Name</label>
+                    <input type="text" name="company_name" placeholder="e.g. HireStack Tech" 
+                           class="w-full p-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all" required>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Work Location</label>
+                    <input type="text" name="location" placeholder="Remote / New York" 
+                           class="w-full p-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Job Type</label>
+                    <select name="job_type" class="w-full p-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:ring-2 focus:ring-blue-500 outline-none appearance-none cursor-pointer">
+                        <option value="full-time">Full-time</option>
+                        <option value="part-time">Part-time</option>
+                        <option value="contract">Contract</option>
+                        <option value="internship">Internship</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-2">Salary Range</label>
+                    <input type="text" name="salary" placeholder="e.g. $80k - $120k" 
+                           class="w-full p-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all">
+                </div>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-400 mb-2">Required Skills</label>
+                <input type="text" name="required_skills" placeholder="React, Python, AWS (comma separated)" 
+                       class="w-full p-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all">
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-400 mb-2">Job Description & Responsibilities</label>
+                <textarea name="description" rows="6" placeholder="Describe the role, expectations, and benefits..." 
+                          class="w-full p-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all resize-none"></textarea>
+            </div>
+
+            <div>
+                <label class="block text-sm font-medium text-gray-400 mb-2">How to Apply (External Link or Contact Email)</label>
+                <input type="text" name="apply_url" placeholder="https://company.com/careers/apply" 
+                       class="w-full p-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:ring-2 focus:ring-blue-500 outline-none transition-all">
+            </div>
+
+            <div class="pt-4 flex flex-col md:flex-row gap-4">
+               <a href="{% url 'dashboard' %}"> <button type="submit" 
+                        class="flex-1 bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-500 transition duration-300 shadow-lg shadow-blue-900/20 text-lg">
+                    <i class="fas fa-paper-plane mr-2"></i> Publish Job Listing
+                </button></a>
+                <button type="button" 
+                        class="px-8 py-4 bg-transparent border border-gray-700 text-gray-400 rounded-xl hover:bg-gray-800 transition duration-300">
+                    Save as Draft
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile Dashboard | HireStack</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-body: #020617;
+            --bg-card: rgba(15, 23, 42, 0.8);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent: #3b82f6;
+            --accent-hover: #60a5fa;
+            --border: rgba(255,255,255,0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+        body {
+            background: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 40px 20px;
+            background-image:
+                radial-gradient(circle at center, rgba(2,6,23,.4), rgba(2,6,23,.9)),
+                url('https://images.unsplash.com/photo-1497215728101-856f4ea42174');
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 25px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border-radius: 24px;
+            padding: 24px;
+            border: 1px solid var(--border);
+            transition: .3s;
+        }
+
+        .card:hover { transform: translateY(-5px); }
+
+        /* HIGH HOVER EFFECT FOR COVER LETTER */
+        .cover-letter-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.4), rgba(15, 23, 42, 0.9));
+            border: 1px dashed var(--border);
+            cursor: pointer;
+        }
+
+        .cover-letter-card:hover {
+            transform: scale(1.02) translateY(-5px) !important;
+            border: 1px solid var(--accent);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+            background: rgba(30, 41, 59, 0.7);
+        }
+
+        /* SIDEBAR */
+        .profile { text-align: center; }
+        .profile h2 { font-size: 24px; font-weight: 700; }
+        .profile p { color: var(--accent); font-size: 14px; margin: 6px 0 12px; }
+        .profile span {
+            font-size: 13px;
+            color: var(--text-muted);
+            background: rgba(255,255,255,.05);
+            padding: 6px 14px;
+            border-radius: 20px;
+            display: inline-flex;
+            gap: 6px;
+        }
+
+        .side-title {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            font-size: 13px;
+        }
+
+        .contact-item i {
+            width: 30px;
+            height: 30px;
+            background: rgba(59,130,246,.1);
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+        }
+
+        .edu-box {
+            border-left: 3px solid var(--accent);
+            padding-left: 12px;
+        }
+
+        .edu-degree { font-weight: 700; font-size: 14px; }
+        .edu-college { font-size: 12px; color: var(--text-muted); }
+        .edu-year { font-size: 11px; color: var(--accent); margin-top: 4px; }
+
+        /* MAIN */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .add-btn {
+            background: var(--accent);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .section-title {
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .exp-card {
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 14px;
+            background: rgba(255,255,255,.03);
+        }
+
+        .exp-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+        }
+
+        .exp-title { font-weight: 700; font-size: 15px; }
+        .exp-company { font-size: 13px; color: var(--text-muted); }
+        .exp-date {
+            font-size: 11px;
+            color: var(--accent);
+            font-weight: 700;
+            background: rgba(59,130,246,.1);
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+
+        .skills-container { display: flex; flex-wrap: wrap; gap: 8px; }
+        .skill-tag {
+            font-size: 12px;
+            background: rgba(59,130,246,.1);
+            color: var(--accent);
+            padding: 6px 12px;
+            border-radius: 8px;
+        }
+
+        .resume-mini {
+            display: flex;
+            gap: 14px;
+            align-items: center;
+            background: rgba(0,0,0,.2);
+            padding: 12px;
+            border-radius: 12px;
+            margin-bottom: 14px;
+        }
+
+        .view-btn {
+            display: block;
+            text-align: center;
+            background: white;
+            color: #020617;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: 800;
+            text-decoration: none;
+        }
+
+        @media(max-width: 900px){
+            .container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <aside>
+        <div class="card profile">
+            <h2>{{ usep.full_name }}</h2>
+            <p> {{ usep.get_role_display }}
+</p>
+            <span><i class="fa-solid fa-location-dot"></i> {{ usep.location }}</span>
+        </div>
+
+        <div class="card">
+            <div class="side-title"><i class="fa-solid fa-address-book"></i> Contact</div>
+            <div class="contact-item"><i class="fa-solid fa-envelope"></i>{{ usep.email }}</div>
+            <div class="contact-item"><i class="fa-solid fa-phone"></i>{{ usep.phone_number }}</div>
+        </div>
+
+        <div class="card">
+            <div class="side-title"><i class="fa-solid fa-graduation-cap"></i> Education</div>
+            <div class="edu-box">
+                <div class="edu-degree">{{ usep.degree }}</div>
+                <div class="edu-college">{{ usep.college_name }}</div>
+                <div class="edu-year">{{ usep.year_of_study }}</div>
+            </div>
+        </div>
+    </aside>
+
+    <main>
+        <div class="header">
+            <h2>Profile Dashboard</h2>
+            <a href="{% url 'addexp' %}" class="add-btn">
+                <i class="fa-solid fa-plus"></i> Add Experience
+            </a>
+        </div>
+
+        <div class="card" style="margin-bottom:20px;">
+            <div class="section-title"><i class="fa-solid fa-user"></i> Professional Summary</div>
+            <p>{{ usep.about_me }}</p>
+        </div>
+
+        <div class="card" style="margin-bottom:20px;">
+            <div class="section-title"><i class="fa-solid fa-file"></i> Resume</div>
+            <div class="resume-mini">
+                <i class="fa-solid fa-file-pdf fa-2x" style="color:#ef4444;"></i>
+                <div>{{ usep.full_name }}_CV.pdf</div>
+            </div>
+            <a href="{{ usep.resume.url }}" target="_blank" class="view-btn">VIEW RESUME</a>
+        </div>
+
+        
+
+        <div class="card">
+            <div class="section-title"><i class="fa-solid fa-briefcase"></i> Work Experience</div>
+
+            {% for exp in experiences %}
+            <div class="exp-card">
+                <div class="exp-top">
+                    <div>
+                        <div class="exp-title">{{ exp.job_title }}</div>
+                        <div class="exp-company">
+                            {{ exp.company_name }} • {{ exp.location }}
+                        </div>
+                    </div>
+                    <div class="exp-date">
+                        {{ exp.start_date|date:"M Y" }} –
+                        {% if exp.is_current %}Present{% else %}{{ exp.end_date|date:"M Y" }}{% endif %}
+                    </div>
+                </div>
+                <p>{{ exp.description }}</p>
+            </div>
+            {% empty %}
+                <p style="color:var(--text-muted); text-align:center;">No experience added</p>
+            {% endfor %}
+        </div>
+
+       <div class="card" style="margin-top:20px;">
+    <div class="section-title">
+        <i class="fa-solid fa-tools"></i> Skills
+    </div>
+
+    <div class="skills-container">
+        {% for skill in usep.skills.split %}
+            <span class="skill-tag">{{ skill }}</span>
+        {% empty %}
+            <span class="skill-tag">No skills</span>
+        {% endfor %}
+    </div>
+</div>
+
+        <!-- Mock Test History -->
+        <div class="card" style="margin-top:20px;">
+            <div class="section-title">
+                <i class="fa-solid fa-clipboard-list"></i>
+                Mock Test History
+                <span style="margin-left:auto;font-size:12px;background:rgba(59,130,246,.12);color:#3b82f6;padding:4px 12px;border-radius:20px;font-weight:700;">
+                    {{ test_history|length }} test{% if test_history|length != 1 %}s{% endif %} attended
+                </span>
+            </div>
+
+            {% if test_history %}
+            <div style="display:flex;flex-direction:column;gap:12px;">
+                {% for result in test_history %}
+                {% with pct=result.score|floatformat:0 %}
+                <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:14px;">
+                    <div>
+                        <div style="font-weight:700;font-size:14px;margin-bottom:3px;">
+                            <i class="fa-solid fa-brain" style="color:#6366f1;margin-right:6px;"></i>
+                            {{ result.test.title }}
+                        </div>
+                        <div style="font-size:12px;color:var(--text-muted);">
+                            <i class="fa-solid fa-briefcase" style="font-size:10px;margin-right:4px;"></i>{{ result.test.job.job_title }}
+                        </div>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:12px;">
+                        <!-- Score pill -->
+                        <span style="font-size:13px;font-weight:800;background:rgba(59,130,246,.1);color:#60a5fa;padding:6px 14px;border-radius:20px;border:1px solid rgba(59,130,246,.2);">
+                            {{ result.score }} / {{ result.total }}
+                        </span>
+                        <!-- Performance badge -->
+                        {% if result.percentage >= 70 %}
+                        <span style="font-size:11px;font-weight:800;background:rgba(16,185,129,.1);color:#10b981;padding:5px 12px;border-radius:20px;border:1px solid rgba(16,185,129,.2);">
+                            <i class="fa-solid fa-trophy"></i> {{ result.percentage }}% Excellent
+                        </span>
+                        {% elif result.percentage >= 40 %}
+                        <span style="font-size:11px;font-weight:800;background:rgba(245,158,11,.1);color:#f59e0b;padding:5px 12px;border-radius:20px;border:1px solid rgba(245,158,11,.2);">
+                            <i class="fa-solid fa-star-half-alt"></i> {{ result.percentage }}% Good
+                        </span>
+                        {% else %}
+                        <span style="font-size:11px;font-weight:800;background:rgba(244,63,94,.1);color:#f43f5e;padding:5px 12px;border-radius:20px;border:1px solid rgba(244,63,94,.2);">
+                            <i class="fa-solid fa-times-circle"></i> {{ result.percentage }}% Keep Practicing
+                        </span>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endwith %}
+                {% endfor %}
+            </div>
+            {% else %}
+            <p style="color:var(--text-muted);text-align:center;padding:20px 0;">You haven't attended any mock tests yet.</p>
+            {% endif %}
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

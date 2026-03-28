@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>HireStack – Stacking the Future</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root {
+    /* Dark Theme Variables (Default) */
+    --primary-blue: #3b82f6;
+    --bg-color: #05070a;
+    --text-main: #ffffff;
+    --text-muted: #94a3b8;
+    --nav-bg: rgba(11, 15, 25, 0.8);
+    --card-bg: rgba(17, 24, 39, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --hero-gradient: linear-gradient(to bottom, #ffffff 30%, #64748b);
+    --img-overlay: rgba(5, 7, 10, 0.8);
+}
+
+[data-theme="light"] {
+    /* Light Theme Variables */
+    --bg-color: #f8fafc;
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --nav-bg: rgba(255, 255, 255, 0.8);
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(15, 23, 42, 0.1);
+    --hero-gradient: linear-gradient(to bottom, #0f172a 30%, #334155);
+    --img-overlay: rgba(255, 255, 255, 0.6);
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-color);
+    color: var(--text-main);
+    transition: background 0.4s ease, color 0.4s ease;
+    overflow-x: hidden;
+}
+
+/* HIGH-END BACKGROUND IMAGE */
+.bg-image-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(var(--img-overlay), var(--img-overlay)), 
+                url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2070&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+    transition: background 0.4s ease;
+}
+
+/* NAVBAR */
+.navbar {
+    background: var(--nav-bg);
+    backdrop-filter: blur(15px);
+    padding: 15px 40px;
+    border-bottom: 1px solid var(--glass-border);
+}
+.navbar-brand { font-weight: 800; color: var(--text-main) !important; font-size: 1.5rem; }
+.navbar-brand span { color: var(--primary-blue); }
+
+.nav-link {
+    color: var(--text-muted) !important;
+    margin: 0 15px;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+.nav-link:hover { color: var(--primary-blue) !important; }
+
+/* THEME TOGGLE BUTTON */
+.theme-toggle {
+    cursor: pointer;
+    width: 45px;
+    height: 45px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    color: var(--text-main);
+    margin-left: 20px;
+}
+
+/* HERO SECTION */
+.hero { text-align: center; padding: 120px 20px 80px; }
+.hero h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: clamp(48px, 8vw, 94px);
+    font-weight: 900;
+    letter-spacing: -4px;
+    text-transform: uppercase;
+    background: var(--hero-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 5px;
+}
+.hero h1 span {
+    background: linear-gradient(to right, #3b82f6, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.hero .tagline {
+    font-size: 16px;
+    color: var(--primary-blue);
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 45px;
+}
+
+/* SEARCH BAR */
+.search-box {
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+    padding: 12px;
+    border-radius: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    gap: 12px;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+}
+.search-box input {
+    background: rgba(0,0,0,0.05);
+    border: 1px solid var(--glass-border);
+    color: var(--text-main);
+    padding: 15px 20px;
+    border-radius: 16px;
+}
+.search-box input::placeholder { color: var(--text-muted); }
+
+/* COMPANY CARDS */
+.company-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 35px 20px;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.company-card:hover {
+    transform: translateY(-12px);
+    border-color: var(--primary-blue);
+    box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
+}
+.company-card h6 { font-weight: 700; color: var(--text-main); }
+.company-card small { color: var(--primary-blue); font-weight: 600; }
+
+/* ALERT BOX */
+.alert-box {
+    background: var(--card-bg);
+    border: 1px solid var(--glass-border);
+    padding: 60px 40px;
+    border-radius: 40px;
+    margin: 100px auto;
+    max-width: 950px;
+    text-align: center;
+}
+.alert-box h4 { font-weight: 800; color: var(--text-main); }
+
+.btn-post {
+    background: var(--primary-blue);
+    color: #fff !important;
+    border-radius: 12px;
+    padding: 10px 24px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+.btn-post:hover { transform: scale(1.05); opacity: 0.9; }
+
+footer {
+    background: var(--nav-bg);
+    padding: 80px 40px;
+    border-top: 1px solid var(--glass-border);
+}
+
+@media (max-width: 768px) {
+    .search-box { flex-direction: column; border-radius: 30px; }
+}
+</style>
+</head>
+<body data-theme="dark">
+
+<div class="bg-image-overlay"></div>
+
+<nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#"><span>HireStack</span></a>
+        
+        <button class="navbar-toggler border-0 shadow-none text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navContent">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navContent">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+            </ul>
+            
+            <div class="d-flex align-items-center">
+                <div class="dropdown">
+                    <a class="nav-link dropdown-toggle d-flex align-items-center gap-2" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-sign-in-alt"></i> Sign In
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" style="background:rgba(11,15,25,0.95);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:8px;min-width:200px;backdrop-filter:blur(20px);">
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center gap-3 py-2 px-3 rounded-3 text-white" href="{% url 'login' %}" style="transition:0.2s;" onmouseover="this.style.background='rgba(59,130,246,0.15)'" onmouseout="this.style.background='transparent'">
+                                <span style="width:32px;height:32px;background:rgba(59,130,246,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+                                    <i class="fas fa-user text-primary" style="font-size:13px;"></i>
+                                </span>
+                                <div>
+                                    <div style="font-weight:700;font-size:13px;">User Login</div>
+                                    <div style="font-size:11px;color:#64748b;">Find & apply for jobs</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider" style="border-color:rgba(255,255,255,0.07);margin:6px 0;"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center gap-3 py-2 px-3 rounded-3 text-white" href="{% url 'emlogin' %}" style="transition:0.2s;" onmouseover="this.style.background='rgba(99,102,241,0.15)'" onmouseout="this.style.background='transparent'">
+                                <span style="width:32px;height:32px;background:rgba(99,102,241,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+                                    <i class="fas fa-briefcase" style="font-size:13px;color:#6366f1;"></i>
+                                </span>
+                                <div>
+                                    <div style="font-weight:700;font-size:13px;">Employee Login</div>
+                                    <div style="font-size:11px;color:#64748b;">Post jobs & manage hires</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider" style="border-color:rgba(255,255,255,0.07);margin:6px 0;"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center gap-3 py-2 px-3 rounded-3 text-white" href="{% url 'adminlogin' %}" style="transition:0.2s;" onmouseover="this.style.background='rgba(239,68,68,0.15)'" onmouseout="this.style.background='transparent'">
+                                <span style="width:32px;height:32px;background:rgba(239,68,68,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+                                    <i class="fas fa-shield-alt" style="font-size:13px;color:#ef4444;"></i>
+                                </span>
+                                <div>
+                                    <div style="font-weight:700;font-size:13px;">Admin Login</div>
+                                    <div style="font-size:11px;color:#64748b;">Platform administration</div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Join Network Dropdown -->
+                <div class="dropdown">
+                    <button class="btn btn-post ms-3 dropdown-toggle shadow-lg" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Join Network
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end mt-2" style="background:rgba(11,15,25,0.95);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:8px;min-width:220px;backdrop-filter:blur(20px);">
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center gap-3 py-2 px-3 rounded-3 text-white" href="{% url 'register' %}" style="transition:0.2s;" onmouseover="this.style.background='rgba(59,130,246,0.15)'" onmouseout="this.style.background='transparent'">
+                                <span style="width:32px;height:32px;background:rgba(59,130,246,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+                                    <i class="fas fa-user-plus text-primary" style="font-size:13px;"></i>
+                                </span>
+                                <div>
+                                    <div style="font-weight:700;font-size:13px;">Candidate signup</div>
+                                    <div style="font-size:11px;color:#64748b;">Create your professional profile</div>
+                                </div>
+                            </a>
+                        </li>
+                        <li><hr class="dropdown-divider" style="border-color:rgba(255,255,255,0.07);margin:6px 0;"></li>
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center gap-3 py-2 px-3 rounded-3 text-white" href="{% url 'emland' %}" style="transition:0.2s;" onmouseover="this.style.background='rgba(99,102,241,0.15)'" onmouseout="this.style.background='transparent'">
+                                <span style="width:32px;height:32px;background:rgba(99,102,241,0.15);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+                                    <i class="fas fa-rocket" style="font-size:13px;color:#6366f1;"></i>
+                                </span>
+                                <div>
+                                    <div style="font-weight:700;font-size:13px;">Hire Talent</div>
+                                    <div style="font-size:11px;color:#64748b;">Access the employer hub</div>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<section class="hero">
+    <div class="tagline">The Premier Talent Infrastructure</div>
+    <h1>HIRE <span>STACK</span></h1>
+    <p class="text-muted mb-5">Engineering connections between visionaries and world-class opportunities.</p>
+
+    <div class="search-box">
+        <input class="form-control" placeholder="Role, keyword, or tech stack">
+        <input class="form-control" placeholder="Remote or City">
+        <button class="btn btn-post px-5">Explore Jobs</button>
+    </div>
+</section>
+
+<div class="container mb-5">
+    <h4 class="text-center mb-5 font-bold" style="font-weight: 800;">Trusted by Industry Titans</h4>
+    <div class="row g-4">
+        <div class="col-md-3 col-sm-6">
+            <div class="company-card">
+                <img src="https://logo.clearbit.com/google.com" width="50" class="mb-3">
+                <h6>Google</h6>
+                <small>120+ Open Positions</small>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="company-card">
+                <img src="https://logo.clearbit.com/meta.com" width="50" class="mb-3">
+                <h6>Meta</h6>
+                <small>85 Open Positions</small>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="company-card">
+                <img src="https://logo.clearbit.com/stripe.com" width="50" class="mb-3">
+                <h6>Stripe</h6>
+                <small>45 Open Positions</small>
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-6">
+            <div class="company-card">
+                <img src="https://logo.clearbit.com/airbnb.com" width="50" class="mb-3">
+                <h6>Airbnb</h6>
+                <small>20 Open Positions</small>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="alert-box">
+    <h4>Precision Talent Alerts</h4>
+    <p class="text-muted">Don't search for jobs. Let the perfect stack find you.</p>
+    <div class="d-flex justify-content-center mt-4 gap-2 flex-wrap">
+        <input class="form-control w-auto" style="min-width: 300px;" placeholder="talent@yourcompany.com">
+        <button class="btn btn-post">Activate Alerts</button>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 mb-4">
+                <h5 class="text-primary font-bold mb-3">HireStack</h5>
+                <p>Architecting the future of recruitment through advanced algorithmic matching.</p>
+            </div>
+            <div class="col-md-3 mb-4">
+                <h6>Ecosystem</h6>
+                <p class="small">Career Mapping<br>Salary Index<br>Enterprise Solutions</p>
+            </div>
+            <div class="col-md-3 mb-4">
+                <h6>Network</h6>
+                <p class="small">Tech Summits<br>Founder Circle<br>API Documentation</p>
+            </div>
+            <div class="col-md-3 mb-4">
+                <h6>Connect</h6>
+                <div class="d-flex gap-3 mt-2">
+                    <i class="fab fa-twitter"></i>
+                    <i class="fab fa-linkedin"></i>
+                    <i class="fab fa-github"></i>
+                </div>
+            </div>
+        </div>
+        <hr class="mt-5 opacity-10">
+        <p class="text-center small mt-4">© 2026 HireStack Global Infrastructure. All rights reserved.</p>
+    </div>
+</footer>
+
+<script>
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    const themeIcon = document.getElementById('themeIcon');
+
+    themeToggle.addEventListener('click', () => {
+        const currentTheme = body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        
+        body.setAttribute('data-theme', newTheme);
+        
+        // Update Icon
+        if(newTheme === 'light') {
+            themeIcon.classList.replace('fa-moon', 'fa-sun');
+        } else {
+            themeIcon.classList.replace('fa-sun', 'fa-moon');
+        }
+    });
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

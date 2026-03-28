@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HireStack | Team Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .glass {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .text-gradient {
+            background: linear-gradient(to right, #818cf8, #c084fc, #6366f1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-200 overflow-x-hidden">
+
+    <nav class="fixed w-full z-50 glass border-b border-slate-800">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-indigo-500/20">
+                    <i data-lucide="briefcase" class="w-6 h-6"></i>
+                </div>
+                <span class="text-2xl font-bold text-white tracking-tight">HireStack</span>
+            </div>
+
+            <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-400">
+                <a href="#" class="hover:text-indigo-400 transition">Solutions</a>
+                <a href="#" class="hover:text-indigo-400 transition">Resources</a>
+                <a href="#" class="hover:text-indigo-400 transition">Enterprise</a>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <a href="{% url 'emlogin' %}" class="text-sm font-semibold text-slate-300 hover:text-white transition">Sign In</a>
+                <a href="{% url 'emregister' %}" class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2.5 rounded-xl text-sm font-bold transition shadow-lg shadow-indigo-900/20">
+                    Register
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="relative min-h-screen flex items-center justify-center pt-20">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=2000" 
+                 alt="Modern Office" 
+                 class="w-full h-full object-cover opacity-30">
+            <div class="absolute inset-0 bg-gradient-to-b from-slate-950/80 via-slate-950/40 to-slate-950"></div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center">
+            <div class="inline-flex items-center space-x-2 bg-indigo-500/10 border border-indigo-500/20 px-4 py-2 rounded-full mb-8">
+                <span class="w-2 h-2 bg-indigo-500 rounded-full animate-pulse"></span>
+                <span class="text-xs font-bold uppercase tracking-widest text-indigo-400">Revolutionizing Recruitment</span>
+            </div>
+
+            <h1 class="text-6xl md:text-8xl font-black text-white mb-6 leading-tight">
+                HireStack <span class="text-gradient">Team Portal</span>
+            </h1>
+
+            <p class="text-xl md:text-2xl text-slate-400 mb-10 max-w-3xl mx-auto leading-relaxed">
+                The all-in-one ecosystem for elite teams to track, manage, and scale their hiring process with surgical precision.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button class="w-full sm:w-auto px-8 py-4 bg-indigo-600 hover:bg-indigo-500 text-white rounded-2xl font-bold text-lg transition-all transform hover:scale-105 shadow-2xl shadow-indigo-500/20 flex items-center justify-center">
+                    Get Started Now <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
+                </button>
+                <button class="w-full sm:w-auto px-8 py-4 glass text-white rounded-2xl font-bold text-lg hover:bg-slate-800 transition-all flex items-center justify-center">
+                    Watch Demo
+                </button>
+            </div>
+
+            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 pt-12 border-t border-slate-800/50">
+                <div>
+                    <p class="text-3xl font-bold text-white">500+</p>
+                    <p class="text-slate-500 text-sm uppercase tracking-wider">Top Enterprises</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-bold text-white">10k+</p>
+                    <p class="text-slate-500 text-sm uppercase tracking-wider">Daily Applications</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-bold text-white">99.9%</p>
+                    <p class="text-slate-500 text-sm uppercase tracking-wider">System Uptime</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-bold text-white">24/7</p>
+                    <p class="text-slate-500 text-sm uppercase tracking-wider">Expert Support</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-24 max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-indigo-500/50 transition-all group">
+                <div class="w-12 h-12 bg-indigo-500/10 rounded-2xl flex items-center justify-center text-indigo-400 mb-6 group-hover:scale-110 transition">
+                    <i data-lucide="zap"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-3">Lightning Fast</h3>
+                <p class="text-slate-400">Post roles and filter through thousands of applicants in seconds with our optimized engine.</p>
+            </div>
+            <div class="p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-indigo-500/50 transition-all group">
+                <div class="w-12 h-12 bg-indigo-500/10 rounded-2xl flex items-center justify-center text-indigo-400 mb-6 group-hover:scale-110 transition">
+                    <i data-lucide="shield-check"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-3">Secure Pipeline</h3>
+                <p class="text-slate-400">Enterprise-grade security ensuring all candidate data and internal communications are encrypted.</p>
+            </div>
+            <div class="p-8 rounded-3xl bg-slate-900 border border-slate-800 hover:border-indigo-500/50 transition-all group">
+                <div class="w-12 h-12 bg-indigo-500/10 rounded-2xl flex items-center justify-center text-indigo-400 mb-6 group-hover:scale-110 transition">
+                    <i data-lucide="bar-chart-3"></i>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-3">Deep Analytics</h3>
+                <p class="text-slate-400">Visualize your hiring funnel and identify bottlenecks with real-time data visualization.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
