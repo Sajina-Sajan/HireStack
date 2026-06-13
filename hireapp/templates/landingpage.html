@@ -118,30 +118,8 @@ body {
     letter-spacing: 6px;
     text-transform: uppercase;
     font-weight: 700;
-    margin-bottom: 45px;
+    margin-bottom: 25px;
 }
-
-/* SEARCH BAR */
-.search-box {
-    background: var(--card-bg);
-    backdrop-filter: blur(20px);
-    border: 1px solid var(--glass-border);
-    padding: 12px;
-    border-radius: 24px;
-    max-width: 900px;
-    margin: 0 auto;
-    display: flex;
-    gap: 12px;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.2);
-}
-.search-box input {
-    background: rgba(0,0,0,0.05);
-    border: 1px solid var(--glass-border);
-    color: var(--text-main);
-    padding: 15px 20px;
-    border-radius: 16px;
-}
-.search-box input::placeholder { color: var(--text-muted); }
 
 /* COMPANY CARDS */
 .company-card {
@@ -158,20 +136,8 @@ body {
     border-color: var(--primary-blue);
     box-shadow: 0 20px 40px rgba(59, 130, 246, 0.15);
 }
-.company-card h6 { font-weight: 700; color: var(--text-main); }
+.company-card h6 { font-weight: 700; color: var(--text-main); font-size: 1.25rem; }
 .company-card small { color: var(--primary-blue); font-weight: 600; }
-
-/* ALERT BOX */
-.alert-box {
-    background: var(--card-bg);
-    border: 1px solid var(--glass-border);
-    padding: 60px 40px;
-    border-radius: 40px;
-    margin: 100px auto;
-    max-width: 950px;
-    text-align: center;
-}
-.alert-box h4 { font-weight: 800; color: var(--text-main); }
 
 .btn-post {
     background: var(--primary-blue);
@@ -187,10 +153,6 @@ footer {
     background: var(--nav-bg);
     padding: 80px 40px;
     border-top: 1px solid var(--glass-border);
-}
-
-@media (max-width: 768px) {
-    .search-box { flex-direction: column; border-radius: 30px; }
 }
 </style>
 </head>
@@ -254,7 +216,6 @@ footer {
                         </li>
                     </ul>
                 </div>
-                <!-- Join Network Dropdown -->
                 <div class="dropdown">
                     <button class="btn btn-post ms-3 dropdown-toggle shadow-lg" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Join Network
@@ -296,55 +257,36 @@ footer {
 <section class="hero">
     <div class="tagline">The Premier Talent Infrastructure</div>
     <h1>HIRE <span>STACK</span></h1>
-    <p class="text-muted mb-5">Engineering connections between visionaries and world-class opportunities.</p>
-
-    <div class="search-box">
-        <input class="form-control" placeholder="Role, keyword, or tech stack">
-        <input class="form-control" placeholder="Remote or City">
-        <button class="btn btn-post px-5">Explore Jobs</button>
-    </div>
+    <p class="text-muted mb-0">Engineering connections between visionaries and world-class opportunities.</p>
 </section>
 
-<div class="container mb-5">
-    <h4 class="text-center mb-5 font-bold" style="font-weight: 800;">Trusted by Industry Titans</h4>
+<div class="container mb-5 py-4">
+    <h4 class="text-center mb-5" style="font-weight: 800;">Explore Opportunities at Leading Companies</h4>
     <div class="row g-4">
         <div class="col-md-3 col-sm-6">
             <div class="company-card">
-                <img src="https://logo.clearbit.com/google.com" width="50" class="mb-3">
-                <h6>Google</h6>
-                <small>120+ Open Positions</small>
+                <h6 class="mb-2">Google</h6>
+                <small>Leading search, cloud, and AI innovations worldwide.</small>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
             <div class="company-card">
-                <img src="https://logo.clearbit.com/meta.com" width="50" class="mb-3">
-                <h6>Meta</h6>
-                <small>85 Open Positions</small>
+                <h6 class="mb-2">Meta</h6>
+                <small>Building social platforms and immersive digital experiences.</small>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
             <div class="company-card">
-                <img src="https://logo.clearbit.com/stripe.com" width="50" class="mb-3">
-                <h6>Stripe</h6>
-                <small>45 Open Positions</small>
+                <h6 class="mb-2">Amazon</h6>
+                <small>E-commerce, cloud computing, and global technology leader.</small>
             </div>
         </div>
         <div class="col-md-3 col-sm-6">
             <div class="company-card">
-                <img src="https://logo.clearbit.com/airbnb.com" width="50" class="mb-3">
-                <h6>Airbnb</h6>
-                <small>20 Open Positions</small>
+                <h6 class="mb-2">Apple</h6>
+                <small>Known for innovative devices and premium software.</small>
             </div>
         </div>
-    </div>
-</div>
-
-<div class="alert-box">
-    <h4>Precision Talent Alerts</h4>
-    <p class="text-muted">Don't search for jobs. Let the perfect stack find you.</p>
-    <div class="d-flex justify-content-center mt-4 gap-2 flex-wrap">
-        <input class="form-control w-auto" style="min-width: 300px;" placeholder="talent@yourcompany.com">
-        <button class="btn btn-post">Activate Alerts</button>
     </div>
 </div>
 
@@ -352,28 +294,28 @@ footer {
     <div class="container">
         <div class="row">
             <div class="col-md-3 mb-4">
-                <h5 class="text-primary font-bold mb-3">HireStack</h5>
+                <h5 class="text-primary font-bold mb-3" style="font-weight:800;">HireStack</h5>
                 <p>Architecting the future of recruitment through advanced algorithmic matching.</p>
             </div>
             <div class="col-md-3 mb-4">
-                <h6>Ecosystem</h6>
-                <p class="small">Career Mapping<br>Salary Index<br>Enterprise Solutions</p>
+                <h6 style="font-weight:700;">Ecosystem</h6>
+                <p class="small text-muted">Career Mapping<br>Salary Index<br>Enterprise Solutions</p>
             </div>
             <div class="col-md-3 mb-4">
-                <h6>Network</h6>
-                <p class="small">Tech Summits<br>Founder Circle<br>API Documentation</p>
+                <h6 style="font-weight:700;">Network</h6>
+                <p class="small text-muted">Tech Summits<br>Founder Circle<br>API Documentation</p>
             </div>
             <div class="col-md-3 mb-4">
-                <h6>Connect</h6>
-                <div class="d-flex gap-3 mt-2">
+                <h6 style="font-weight:700;">Connect</h6>
+                <div class="d-flex gap-3 mt-2 text-muted">
                     <i class="fab fa-twitter"></i>
                     <i class="fab fa-linkedin"></i>
                     <i class="fab fa-github"></i>
                 </div>
             </div>
         </div>
-        <hr class="mt-5 opacity-10">
-        <p class="text-center small mt-4">© 2026 HireStack Global Infrastructure. All rights reserved.</p>
+        <hr class="mt-5 opacity-10" style="border-color:var(--glass-border);">
+        <p class="text-center small mt-4 text-muted">© 2026 HireStack Global Infrastructure. All rights reserved.</p>
     </div>
 </footer>
 
