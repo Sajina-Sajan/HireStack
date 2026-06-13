@@ -1,4 +1,4 @@
-HireStack – Job Portal
+HireStack – Multi Role Job Portal
 
 HireStack is a full-stack web application designed to bridge the gap between job seekers and recruiters. It includes an integrated aptitude testing system to evaluate candidates efficiently before hiring.
 
@@ -42,7 +42,7 @@ Users can apply for jobs and attend tests
  
  Advanced analytics dashboard
 
- Deployment on cloud (AWS / Render / Vercel)
+ Deployment on cloud (AWS / Render)
 
  Resume upload & filtering system
 
